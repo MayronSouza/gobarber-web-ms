@@ -40,7 +40,7 @@
     "camelcase": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
-    "requireForBlockBody": false,
+    "requireForBlockBody": "off",
     "eslint implicit-arrow-linebreak": [
       "error",
       "below"
