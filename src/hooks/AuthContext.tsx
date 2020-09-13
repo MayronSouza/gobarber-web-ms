@@ -13,6 +13,7 @@ interface SignInCredentials {
 interface AuthContextData {
   user: object;
   signIn(credentials: SignInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -30,12 +31,12 @@ const AuthProvider: React.FC = ({ children }) => {
   });
 
   const signIn = useCallback(async ({ email, password }) => {
-    const { data } = await api.post('sessions', {
+    const response = await api.post('sessions', {
       email,
       password,
     });
 
-    const { token, user } = data;
+    const { token, user } = response.data;
 
     localStorage.setItem('@GoStackMS: token', token);
     localStorage.setItem('@GoStackMS: user', JSON.stringify(user));
@@ -43,8 +44,15 @@ const AuthProvider: React.FC = ({ children }) => {
     setData({ token, user });
   }, []);
 
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoStackMS: token');
+    localStorage.removeItem('@GoStackMS: user');
+
+    setData({} as AuthState);
+  }, []);
+
   return (
-    <AuthContext.Provider value={{ user: data.user, signIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
