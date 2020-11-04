@@ -1,9 +1,15 @@
+/* eslint-disable camelcase */
 import React, { createContext, useCallback, useContext, useState } from 'react';
 import api from '../services/api';
 
+interface UserAuth {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
 interface AuthState {
   token: string;
-  user: object;
+  user: UserAuth;
 }
 interface SignInCredentials {
   email: string;
@@ -11,7 +17,7 @@ interface SignInCredentials {
 }
 
 interface AuthContextData {
-  user: object;
+  user: UserAuth;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
 }
