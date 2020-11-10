@@ -41,7 +41,7 @@
       "no-unused-expressions": "off",
       "@typescript-eslint/no-unused-vars": "off",
       "@typescript-eslint/ban-types": "off",
-      "@typescript-eslint/camelcase": ["warn"],
+      "@typescript-eslint/camelcase": ["off"],
       "camelcase": "off",
       "import/extensions": [
         "error",
